@@ -73,6 +73,11 @@ def edit(request):
     
     return render(request, 'authapp/edit.html', content)
 
+
+def verify(request):
+    pass
+
+
 def send_verify_mail(user):
     subject = 'Verify your account'
     link = reverse()
