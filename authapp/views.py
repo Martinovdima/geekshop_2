@@ -89,9 +89,6 @@ def verify(request, email, activation_key):
             user.is_active = True
             user.save()
             auth.login(request, user)
-            return render(request, 'authapp/verify.html')
-    else:
-        print(f'error activation user: {user}')
         return render(request, 'authapp/verify.html')
     return HttpResponseRedirect(reverse('main'))
 
