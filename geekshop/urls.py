@@ -1,3 +1,4 @@
+import authapp.views
 import mainapp.views as mainapp
 from django.conf import settings
 from django.conf.urls import include

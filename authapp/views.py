@@ -3,6 +3,7 @@ from authapp.forms import ShopUserLoginForm, ShopUserRegisterForm
 from django.contrib import auth
 from django.urls import reverse
 from django.conf import settings
+from django.core.mail import send_mail
 
 from authapp.forms import ShopUserEditForm
 
@@ -48,7 +49,12 @@ def register(request):
         register_form = ShopUserRegisterForm(request.POST, request.FILES)
     
         if register_form.is_valid():
-            register_form.save()
+            user = register_form.save()
+            if send_verify_mail(user):
+                print('succes sending')
+            else:
+                print('sending failed')
+
             return HttpResponseRedirect(reverse('auth:login'))
     else:
         register_form = ShopUserRegisterForm()
@@ -74,11 +80,12 @@ def edit(request):
     return render(request, 'authapp/edit.html', content)
 
 
-def verify(request):
+def verify(request, email, activation_key):
     pass
 
 
 def send_verify_mail(user):
     subject = 'Verify your account'
-    link = reverse()
+    link = reverse('auth:verify', args=[user.email, user.activation_key])
     message = f'{settings.DOMAIN}{link}'
+    return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
