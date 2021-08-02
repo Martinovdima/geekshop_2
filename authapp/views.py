@@ -71,3 +71,8 @@ def edit(request):
     content = {'title': title, 'edit_form': edit_form}
     
     return render(request, 'authapp/edit.html', content)
+
+def send_verify_mail(user):
+    subject = 'Verify your account'
+    link = reverse()
+    message = f'{settings.DOMAIN}{link}'
