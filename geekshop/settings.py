@@ -135,3 +135,17 @@ MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'authapp.ShopUser'
 
 LOGIN_URL = '/auth/login/'
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'django@gb.local'
+EMAIL_HOST_PASSWORD = 'geekshop'
+EMAIL_USE_SSL = False
+
+EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
+#Реальная настройка для Яндекс.почты
+#EMAIL_HOST = 'smtp.yandex.net'
+#EMAIL_PORT = 465
+#EMAIL_HOST_USER = 'my_login@yandex.ru'
+#EMAIL_HOST_PASSWORD = 'my_password'
+#EMAIL_USE_SSL = True
