@@ -154,6 +154,10 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_VK_OAUTH2_KEY = '7917728'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = '7yC7G7UAw5vcP1uTOt7z'
 
+# Способ работы с переменными окружения продакшн
+#SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv(SOCIAL_AUTH_VK_OAUTH2_KEY)
+#SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv(SOCIAL_AUTH_VK_OAUTH2_SECRET)
+
 #вариант python -m smtpd -n -c DebuggingServer localhost:25
 EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
 
