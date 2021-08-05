@@ -24,8 +24,39 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'заказ'
+        verbose_name_plural = 'заказы'
+        ordering = ('-created',)
+
+    def __str__(self):
+        return f'зака номер {self.pk}'
+
+    def get_total_quantity(self):
+        items = self.orderitems.select_related()
+        return sum(list(map(lambda x: x.quantity, items)))
+
+    def get_total_coast(self):
+        items = self.orderitems.select_related()
+        return sum(list(map(lambda x: x.get_product_coast, items)))
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='orderitems')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
+
+    @property
+    def get_product_coast(self):
+        return self.quantity * self.product.price
+
+
+
+
+
+
+
+
+
+
+
+
