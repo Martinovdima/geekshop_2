@@ -20,7 +20,7 @@ class Order(models.Model):
     )
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    status = models.CharField(choices=STATUSES, default=FORMING)
+    status = models.CharField(choices=STATUSES, default=FORMING, max_length=50)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
