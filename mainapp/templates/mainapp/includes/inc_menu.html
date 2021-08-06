@@ -21,6 +21,11 @@
                 {{ user.first_name|default:'Пользователь' }}
             </a>
         </li>
+         <li>
+            <a href="{% url 'ordersapp:order_list' %}">
+                Заказы
+            </a>
+        </li>
     {% endif %}
     {% if user.is_superuser %}
         <li>

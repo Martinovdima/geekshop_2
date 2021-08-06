@@ -20,7 +20,6 @@
         </thead>
         <tbody>
         {% for item in object_list %}
-            {% if item.is_active %}
                 <tr>
                     <td class="td1 orders_list">{{ item.pk }}</td>
                     <td>{{ item.created|date:"Y-m-d H:i:s" }}</td>
@@ -46,7 +45,6 @@
                         {% endif %}
                     </td>
                 </tr>
-            {% endif %}
         {% endfor %}
         </tbody>
     </table>
