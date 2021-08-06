@@ -1,6 +1,6 @@
 {% if object.status == 'FM' %}
     <button class="btn btn-warning btn-round form-control last">
-        <a href="#">
+        <a href="{% url 'ordersapp:order_forming_complete' object.pk %}">
             совершить покупку
         </a>
     </button>
