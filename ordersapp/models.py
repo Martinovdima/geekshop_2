@@ -42,6 +42,10 @@ class Order(models.Model):
         return sum(list(map(lambda x: x.get_product_coast, items)))
 
     def delete(self):
+        for item in self.orderitems.select_related():
+            item.product.quantity += item.quantity
+            item.product.save()
+
         self.is_active = False
         self.save()
 
