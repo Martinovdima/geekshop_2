@@ -2,7 +2,18 @@ from django.db import models
 from django.conf import settings
 from mainapp.models import Product
 
+class BasketQuerySet(models.QuerySet):
+
+    def delete(self):
+        for object in self:
+            object.product.quantity += object.quantity
+            object.product.save()
+        super().delete()
+
+
 class Basket(models.Model):
+    objects = BasketQuerySet.as_manager()
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='количество', default=0)
@@ -32,3 +43,8 @@ class Basket(models.Model):
         return _totalcost
         
     total_cost = property(_get_total_cost)
+
+    def delete(self):
+        self.product.quantity += self.quantity
+        self.product.save()
+        super().delete()
