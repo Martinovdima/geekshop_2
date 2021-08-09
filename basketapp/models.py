@@ -21,11 +21,11 @@ class Basket(models.Model):
     add_datetime = models.DateTimeField(verbose_name='время добавления', auto_now_add=True)
     
     
-    def _get_product_cost(self):
+    def _get_product_coast(self):
         "return cost of all products this type"
         return self.product.price * self.quantity
     
-    product_cost = property(_get_product_cost)
+    product_cost = property(_get_product_coast)
     
     
     def _get_total_quantity(self):
@@ -37,13 +37,13 @@ class Basket(models.Model):
     total_quantity = property(_get_total_quantity)
     
     
-    def _get_total_cost(self):
+    def _get_total_coast(self):
         "return total cost for user"
         _items = Basket.objects.filter(user=self.user)
         _totalcost = sum(list(map(lambda x: x.product_cost, _items)))
         return _totalcost
         
-    total_cost = property(_get_total_cost)
+    total_cost = property(_get_total_coast)
 
     #def delete(self):
         #self.product.quantity += self.quantity
