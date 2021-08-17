@@ -58,6 +58,7 @@ window.onload = function () {
                     var price_html = '<span>' + data.price.toString().replace('.', ',') + '</span> руб';
                     var curr_tr = $('.order_form table').find('tr:eq(' + (orderitem_num + 1) + ')');
                     curr_tr.find('td:eq(2)').html(price_html);
+                    curr_tr.find('input[type="number"]').val(0)
                     orderSummaryRecalc();
                 }
             },
