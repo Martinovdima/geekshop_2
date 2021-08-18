@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Verify your account
+From: django@gb.local
+To: tati@mail.ru
+Date: Mon, 02 Aug 2021 17:34:33 -0000
+Message-ID: <162792567309.14552.16269139380895210308@Home>
+
+http://localhost:8000/auth/verify/tati@mail.ru/fc914cf173d686728c7d69f92b33712906f30f04/
+-------------------------------------------------------------------------------

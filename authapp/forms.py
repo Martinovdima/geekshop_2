@@ -1,6 +1,7 @@
 from django import forms
+import random, hashlib
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .models import ShopUser
+from .models import ShopUser, ShopUserProfile
 
 from django.contrib.auth.forms import UserChangeForm
 
@@ -31,8 +32,15 @@ class ShopUserRegisterForm(UserCreationForm):
         data = self.cleaned_data['age']
         if data < 18:
             raise forms.ValidationError("Вы слишком молоды!")
-
         return data
+
+    def save(self, commit=True):
+        user = super().save()
+        user.is_active = False
+        salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
+        user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
+        user.save()
+        return user
         
 
 class ShopUserEditForm(UserChangeForm):
@@ -54,3 +62,16 @@ class ShopUserEditForm(UserChangeForm):
             raise forms.ValidationError("Вы слишком молоды!")
 
         return data
+
+class ShopUserProfileEdit(forms.ModelForm):
+
+    class Meta:
+        model = ShopUserProfile
+        fields = ('tag_line', 'about_me', 'gender')
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+            field.help_text = ''
