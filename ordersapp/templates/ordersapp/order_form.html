@@ -13,7 +13,7 @@
                         <thead>
                         <tr>
                             {% for field in form.visible_fields %}
-                                <th class="{% cycle 'td1' 'td2' 'td3' %} order
+                                <th class="{% cycle 'td1' 'td2' 'td3' 'td4' %} order
 formset_td">
                                     {{ field.label|capfirst }}
                                 </th>
@@ -23,7 +23,7 @@ formset_td">
                     {% endif %}
                     <tr class="formset_row">
                         {% for field in form.visible_fields %}
-                            <td class="{% cycle 'td1' 'td2' 'td3' %} order
+                            <td class="{% cycle 'td1' 'td2' 'td3' 'td4' %} order
 formset_td">
                                 {% if forloop.first %}
                                     {% for hidden in form.hidden_fields %}
@@ -31,7 +31,15 @@ formset_td">
                                     {% endfor %}
                                 {% endif %}
                                 {{ field.errors.as_ul }}
-                                {{ field }}
+                                {% if field.name == 'price' %}
+                                    {% if field.value %}
+                                        <span class="orderitems-{{ forloop.parentloop.counter0 }}-price">
+                                            {{ field.value }}
+                                        </span> руб.
+                                    {% endif %}
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
                             </td>
                         {% endfor %}
                     </tr>
