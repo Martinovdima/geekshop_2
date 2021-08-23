@@ -87,3 +87,4 @@
    87  systemctl status gunicorn
    88  history
    89  history > hist.txt
+remove
