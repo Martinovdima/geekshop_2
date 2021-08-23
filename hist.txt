@@ -1,0 +1,89 @@
+    1  ssh-keygen
+    2  cat/root/.ssh/id_rsa.pub
+    3  ssh-keygen
+    4  y
+    5  ssh-keygen
+    6  cat/root/.ssh/id_rsa.pub
+    7  cat /root/.ssh/id_rsa.pub
+    8  apt update
+    9  apt install nginx
+   10  apt install postgresql postgresql-contrib
+   11  apt install python3-venv
+   12  apt install git-core
+   13  apt install git
+   14  apt install mc
+   15  apt install htop
+   16  mcedit /etc/postgresql/12/main/pg_hba.conf
+   17  systemctl restart postgresql
+   18  systemctl status postgresql
+   19  psql -U postgres
+   20  useradd -g www-data -m django
+   21  cd /home/django/
+   22  l-la
+   23  ls-la
+   24  ls -la
+   25  git clone git@github.com:Martinovdima/geekshop_2.git
+   26  ls -la
+   27  cd geekshop_2/
+   28  ls -la
+   29  python3 -m venv venv
+   30  source env/bin/activate
+   31  python3 -m venv venv
+   32  source env/bin/activate
+   33  ls -la
+   34  source env/bin/activate
+   35  python3 -m venv env
+   36  source env/bin/activate
+   37  pip3 install -r requirements.txt
+   38  cd ..
+   39  git clone git@github.com:Martinovdima/geekshop_2.git
+   40  source env/bin/deactivate
+   41  deactivate
+   42  la -la
+   43  rmdir geekshop_2
+   44  rm -R geekshop_2
+   45  la -la
+   46  git clone 
+   47  git clone git@github.com:Martinovdima/geekshop_2.git
+   48  la -la
+   49  cd geekshop_2/
+   50  la -la
+   51  cd ..
+   52  rm -R geekshop_2
+   53  git clone git@github.com:Martinovdima/geekshop_2.git
+   54  cd geekshop_2
+   55  la -la
+   56  python3 -m venv env
+   57  source env/bin/activate
+   58  pip3 install -r requirements.txt
+   59  python3 manage.py migrate
+   60  python3 manage.py runserver
+   61  python3 manage.py fill_db
+   62  chown -R django /home/django/geekshop_2/
+   63  mcedit /etc/system/gunicorn.service
+   64  mcedit /etc/systemd/system/gunicorn.service
+   65  pip3 install gunicorn
+   66  systemctl enable gunicorn
+   67  systemctl start gunicorn
+   68  systemctl status gunicorn
+   69  mcedit /etc/systemd/system/gunicorn.service
+   70  systemctl status gunicorn
+   71  mcedit /etc/systemd/system/gunicorn.service
+   72  systemctl deamon reload
+   73  systemctl deamon-reload
+   74  systemctl deamon -reload
+   75  systemctl start gunicorn
+   76  mcedit /etc/systemd/system/gunicorn.service
+   77  systemctl start gunicorn
+   78  systemctl daemon-reload
+   79  systemctl enable gunicorn
+   80  systemctl start gunicorn
+   81  systemctl status gunicorn
+   82  mcedit /etc/systemd/system/gunicorn.service
+   83  systemctl start gunicorn
+   84  systemctl daemon-reload
+   85  systemctl enable gunicorn
+   86  systemctl start gunicorn
+   87  systemctl status gunicorn
+   88  history
+   89  history > hist.txt
