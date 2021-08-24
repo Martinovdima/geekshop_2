@@ -58,7 +58,7 @@ def basket_edit(request, pk, quantity):
         else:
             new_basket_item.delete()
             
-        basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
+        basket_items = Basket.objects.filter(user=request.user).order_by('product__category').select_related()
         
         content = {
             'basket_items': basket_items,
