@@ -40,7 +40,7 @@ class Basket(models.Model):
     def _get_total_coast(self):
         "return total cost for user"
         _items = Basket.objects.filter(user=self.user).select_related()
-        _totalcost = sum(list(map(lambda x: x.product_cost, _items)))
+        _totalcost = sum(list(map(lambda x: x.product_cost, _items.select_related())))
         return _totalcost
         
     total_cost = property(_get_total_coast)
