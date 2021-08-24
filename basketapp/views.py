@@ -11,7 +11,7 @@ from django.http import JsonResponse
 @login_required
 def basket(request):
     title = 'корзина'
-    basket_items = Basket.objects.filter(user=request.user).order_by('product__category').select_related()
+    basket_items = Basket.objects.filter(user=request.user).select_related().order_by('product__category')
     
     content = {
         'title': title,
