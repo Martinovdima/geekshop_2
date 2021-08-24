@@ -18,13 +18,13 @@ def load_from_json(file_name):
 
         
 def get_hot_product():
-    products = Product.objects.filter(is_active=True, category__is_active=True).select_related('category')
+    products = Product.objects.filter(is_active=True, category__is_active=True)
     
     return random.sample(list(products), 1)[0]
     
     
 def get_same_products(hot_product):
-    same_products = Product.objects.filter(category=hot_product.category, is_active=True).exclude(pk=hot_product.pk).select_related('category')[:3]
+    same_products = Product.objects.filter(category=hot_product.category, is_active=True).exclude(pk=hot_product.pk)[:3]
     
     return same_products
         
@@ -32,7 +32,7 @@ def get_same_products(hot_product):
         
 def main(request):
     title = 'главная'  
-    products = Product.objects.filter(is_active=True, category__is_active=True).select_related('category')[:3]
+    products = Product.objects.filter(is_active=True, category__is_active=True).select_related()[:3]
     
     content = {
         'title': title,
