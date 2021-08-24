@@ -18,7 +18,7 @@ def load_from_json(file_name):
 
         
 def get_hot_product():
-    products = Product.objects.filter(is_active=True, category__is_active=True).select_related()
+    products = Product.objects.filter(is_active=True, category__is_active=True)
     
     return random.sample(list(products), 1)[0]
     
@@ -44,7 +44,7 @@ def main(request):
 
 def products(request, pk=None, page=1):   
     title = 'продукты'
-    links_menu = ProductCategory.objects.filter(is_active=True).select_related()
+    links_menu = ProductCategory.objects.filter(is_active=True)
            
     if pk is not None:
         if pk == 0:
@@ -52,10 +52,10 @@ def products(request, pk=None, page=1):
                 'pk': 0,
                 'name': 'все'
             }
-            products = Product.objects.filter(is_active=True, category__is_active=True).order_by('price').select_related()
+            products = Product.objects.filter(is_active=True, category__is_active=True).order_by('price')
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            products = Product.objects.filter(category__pk=pk, is_active=True, category__is_active=True).order_by('price').select_related()
+            products = Product.objects.filter(category__pk=pk, is_active=True, category__is_active=True).order_by('price')
         
         paginator = Paginator(products, 2)
         try:
@@ -74,8 +74,8 @@ def products(request, pk=None, page=1):
         
         return render(request, 'mainapp/products_list.html', content)
     
-    hot_product = get_hot_product().select_related()
-    same_products = get_same_products(hot_product).select_related()
+    hot_product = get_hot_product()
+    same_products = get_same_products(hot_product)
     
     content = {
         'title': title,
@@ -89,7 +89,7 @@ def products(request, pk=None, page=1):
     
 def product(request, pk):
     title = 'продукты'
-    links_menu = ProductCategory.objects.filter(is_active=True).select_related()
+    links_menu = ProductCategory.objects.filter(is_active=True)
 
     product = get_object_or_404(Product, pk=pk)
     
