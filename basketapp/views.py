@@ -27,11 +27,11 @@ def basket_add(request, pk):
     if 'login' in request.META.get('HTTP_REFERER'):
         return HttpResponseRedirect(reverse('products:product', args=[pk]))
     
-    product = get_object_or_404(Product, pk=pk)
+    product = get_object_or_404(Product, pk=pk).select_related()
     basket = Basket.objects.filter(user=request.user, product=product).first().select_related()
 
     if not basket:
-        basket = Basket(user=request.user, product=product)
+        basket = Basket(user=request.user, product=product).select_related()
 
     basket.quantity += 1
     basket.save()
