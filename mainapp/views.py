@@ -18,7 +18,7 @@ def load_from_json(file_name):
 
         
 def get_hot_product():
-    products = Product.objects.filter(is_active=True, category__is_active=True)
+    products = Product.objects.filter(is_active=True, category__is_active=True).select_related()
     
     return random.sample(list(products), 1)[0]
     
@@ -44,7 +44,7 @@ def main(request):
 
 def products(request, pk=None, page=1):   
     title = 'продукты'
-    links_menu = ProductCategory.objects.filter(is_active=True)
+    links_menu = ProductCategory.objects.filter(is_active=True).select_related()
            
     if pk is not None:
         if pk == 0:
@@ -74,8 +74,8 @@ def products(request, pk=None, page=1):
         
         return render(request, 'mainapp/products_list.html', content)
     
-    hot_product = get_hot_product()
-    same_products = get_same_products(hot_product)
+    hot_product = get_hot_product().select_related()
+    same_products = get_same_products(hot_product).select_related()
     
     content = {
         'title': title,
@@ -89,7 +89,7 @@ def products(request, pk=None, page=1):
     
 def product(request, pk):
     title = 'продукты'
-    links_menu = ProductCategory.objects.filter(is_active=True)
+    links_menu = ProductCategory.objects.filter(is_active=True).select_related()
 
     product = get_object_or_404(Product, pk=pk)
     
