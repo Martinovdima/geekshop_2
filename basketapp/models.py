@@ -31,7 +31,7 @@ class Basket(models.Model):
     def _get_total_quantity(self):
         "return total quantity for user"
         _items = Basket.objects.filter(user=self.user).select_related()
-        _totalquantity = sum(list(map(lambda x: x.quantity, _items))).select_related()
+        _totalquantity = sum(list(map(lambda x: x.quantity, _items)))
         return _totalquantity
         
     total_quantity = property(_get_total_quantity)
