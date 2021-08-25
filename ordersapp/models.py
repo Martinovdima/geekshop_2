@@ -38,7 +38,7 @@ class Order(models.Model):
         return sum(list(map(lambda x: x.quantity, items)))
 
     def get_total_coast(self):
-        items = self.orderitems.select_related()
+        items = self.objects.orderitems.select_related()
         return sum(list(map(lambda x: x.get_product_coast, items)))
 
     #def delete(self):
