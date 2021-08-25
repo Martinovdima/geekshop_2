@@ -34,11 +34,11 @@ class Order(models.Model):
         return f'зака номер {self.pk}'
 
     def get_total_quantity(self):
-        items = self.orderitems.select_related()
+        items = self.orderitems
         return sum(list(map(lambda x: x.quantity, items)))
 
     def get_total_coast(self):
-        items = self.orderitems.prefetch_related()
+        items = self.orderitems.select_related()
         return sum(list(map(lambda x: x.get_product_coast, items)))
 
     #def delete(self):
