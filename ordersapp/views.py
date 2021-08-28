@@ -62,7 +62,7 @@ class OrderItemCreate(CreateView):
 
         return super().form_valid(form)
 
-
+# Пишу чтобы протестировать ГИТХАБ
 class OrderItemUpdate(UpdateView):
     model = Order
     fields = []
