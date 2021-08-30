@@ -41,7 +41,10 @@ class Basket(models.Model):
         _items = self.get_items_cached
 
         return sum(list(map(lambda x: x.product_cost, _items)))
-    
+
+    @staticmethod
+    def get_items(user):
+        return user.basket.select_related().order_by('product__category')
     
     #def _get_total_quantity(self):
         #"return total quantity for user"
