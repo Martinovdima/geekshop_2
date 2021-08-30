@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from mainapp.models import Product
+from django.utils.functional import cached_property
 
 
 #class BasketQuerySet(models.QuerySet):
@@ -26,24 +27,41 @@ class Basket(models.Model):
         return self.product.price * self.quantity
     
     product_cost = property(_get_product_coast)
+
+    @cached_property
+    def get_items_cached(self):
+        return self.user.basket.select_related()
+
+    def get_total_quantity(self):
+        _items = self.get_items_cached
+
+        return sum(list(map(lambda x: x.quantity, _items)))
+
+    def get_total_cost(self):
+        _items = self.get_items_cached
+
+        return sum(list(map(lambda x: x.product_cost, _items)))
+
+    @staticmethod
+    def get_items(user):
+        return user.basket.select_related().order_by('product__category')
     
-    
-    def _get_total_quantity(self):
-        "return total quantity for user"
-        _items = Basket.objects.filter(user=self.user).select_related()
-        _totalquantity = sum(list(map(lambda x: x.quantity, _items)))
-        return _totalquantity
+    #def _get_total_quantity(self):
+        #"return total quantity for user"
+        #_items = Basket.objects.filter(user=self.user).select_related()
+        #_totalquantity = sum(list(map(lambda x: x.quantity, _items)))
+        #return _totalquantity
         
-    total_quantity = property(_get_total_quantity)
+    #total_quantity = property(_get_total_quantity)
     
     
-    def _get_total_coast(self):
-        "return total cost for user"
-        _items = Basket.objects.filter(user=self.user).select_related()
-        _totalcost = sum(list(map(lambda x: x.product_cost, _items)))
-        return _totalcost
+    #def _get_total_coast(self):
+        #"return total cost for user"
+        #_items = Basket.objects.filter(user=self.user).select_related()
+        #_totalcost = sum(list(map(lambda x: x.product_cost, _items)))
+        #return _totalcost
         
-    total_cost = property(_get_total_coast)
+    #total_cost = property(_get_total_coast)
 
     #def delete(self):
         #self.product.quantity += self.quantity
